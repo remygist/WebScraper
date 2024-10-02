@@ -21,8 +21,12 @@ const getShoes = async () => {
     const shoes = await page.evaluate(() => {
         const shoe = document.querySelector(".product-tile")
         const titel = shoe.querySelector(".brand a").innerHTML;
-        
-        return {titel}
+        const image = shoe.querySelector(".tile-image").src;
+
+        return {
+            titel,
+            image
+        }
     })
 
     console.log(shoes);
