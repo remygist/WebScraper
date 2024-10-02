@@ -60,9 +60,19 @@ const getShoes = async () => {
     });
 
     const moreBtnSelector = ".btn.btn-primary.px-5";
-    const isButton = (await page.$(moreBtnSelector)) !== null;
+    
+    let amountOfBtnClick = 0;
 
-    if (isButton) {
+    while (amountOfBtnClick < 9) {
+        const isButton = (await page.$(moreBtnSelector)) !== null;
+
+        if (!isButton) {
+            console.log("no button found");
+            break;
+        }
+
+        const initialProductCount = await page.evaluate(() => document.querySelectorAll('.product-tile').length);
+
         // Scroll to the button and click it
         await page.evaluate(() => {
             const btn = document.querySelector(".btn.btn-primary.px-5");
@@ -70,10 +80,15 @@ const getShoes = async () => {
             btn.click();
         });
 
-        console.log("More button clicked");
-    } else {
-        console.log("More button not found");
-    }
+        await page.waitForFunction(
+            (initialCount) => document.querySelectorAll('.product-tile').length > initialCount,
+            {},
+            initialProductCount
+        );
+        
+        amountOfBtnClick++;
+    } 
+
 
     // browser.close();
 };
