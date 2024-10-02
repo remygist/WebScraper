@@ -19,18 +19,33 @@ const getShoes = async () => {
 
     //class of first item --> product-tile js-plp-tile product product-tile--plp-view hover-content-loaded
     const shoes = await page.evaluate(() => {
-        const shoe = document.querySelector(".product-tile")
-        const shoeTitel = shoe.querySelector(".brand a").innerHTML;
-        const shoeImage = shoe.querySelector(".tile-image").src;
-        const shoeType = shoe.querySelector(".pdp-link > a").innerHTML;
-        const shoePrice = shoe.querySelector(".value").innerHTML;
+        const shoeList = document.querySelectorAll(".product-tile");
 
-        return {
-            shoeTitel,
-            shoeImage,
-            shoeType,
-            shoePrice
-        }
+        return Array.from(shoeList).map((shoe) =>{
+            
+            const shoeTitel = shoe.querySelector(".brand a") 
+                ? shoe.querySelector(".brand a").innerHTML 
+                : "Unknown Title";
+
+            const shoeImage = shoe.querySelector(".tile-image") 
+                ? shoe.querySelector(".tile-image").src 
+                : "No Image Available";
+
+            const shoeType = shoe.querySelector(".pdp-link > a") 
+                ? shoe.querySelector(".pdp-link > a").innerHTML 
+                : "Unknown Type";
+
+            const shoePrice = shoe.querySelector(".value") 
+                ? shoe.querySelector(".value").innerHTML 
+                : "No Price Available";
+
+            return {
+                shoeTitel,
+                shoeImage,
+                shoeType,
+                shoePrice
+            }
+        });
     })
 
     console.log(shoes);
