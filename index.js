@@ -17,26 +17,29 @@ const getShoes = async () => {
         waitUntil: "domcontentloaded",
     });
 
-    //class of first item --> product-tile js-plp-tile product product-tile--plp-view hover-content-loaded
+    //accept cookies
+    await page.click("#onetrust-accept-btn-handler")
+
     const shoes = await page.evaluate(() => {
+
         const shoeList = document.querySelectorAll(".product-tile");
 
-        return Array.from(shoeList).map((shoe) =>{
-            
-            const shoeTitel = shoe.querySelector(".brand a") 
-                ? shoe.querySelector(".brand a").innerHTML 
+        return Array.from(shoeList).map((shoe) => {
+
+            const shoeTitel = shoe.querySelector(".brand a")
+                ? shoe.querySelector(".brand a").innerHTML
                 : "Unknown Title";
 
-            const shoeImage = shoe.querySelector(".tile-image") 
-                ? shoe.querySelector(".tile-image").src 
+            const shoeImage = shoe.querySelector(".tile-image")
+                ? shoe.querySelector(".tile-image").src
                 : "No Image Available";
 
-            const shoeType = shoe.querySelector(".pdp-link > a") 
-                ? shoe.querySelector(".pdp-link > a").innerHTML 
+            const shoeType = shoe.querySelector(".pdp-link > a")
+                ? shoe.querySelector(".pdp-link > a").innerHTML
                 : "Unknown Type";
 
-            const shoePrice = shoe.querySelector(".value") 
-                ? shoe.querySelector(".value").innerHTML 
+            const shoePrice = shoe.querySelector(".value")
+                ? shoe.querySelector(".value").innerHTML
                 : "No Price Available";
 
             return {
@@ -49,7 +52,10 @@ const getShoes = async () => {
     })
 
     console.log(shoes);
-    browser.close();
+
+    await page.click(".show-more-products > .text-center > .btn");
+
+    //browser.close();
 
 };
 
