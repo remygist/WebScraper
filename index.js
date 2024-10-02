@@ -19,17 +19,14 @@ const getShoes = async () => {
 
     //class of first item --> product-tile js-plp-tile product product-tile--plp-view hover-content-loaded
     const shoes = await page.evaluate(() => {
-        const shoe = document.querySelector(".product-tile").innerHTML
-        //console.log("bhuifaezaeibu" + shoe);
-
-        //const text = document.querySelector(".pdp-link brand").innerHTML
-        console.log(shoe);
-
-        return shoe
+        const shoe = document.querySelector(".product-tile")
+        const titel = shoe.querySelector(".brand a").innerHTML;
+        
+        return {titel}
     })
 
     console.log(shoes);
-
+    browser.close();
 
 };
 
