@@ -20,12 +20,16 @@ const getShoes = async () => {
     //class of first item --> product-tile js-plp-tile product product-tile--plp-view hover-content-loaded
     const shoes = await page.evaluate(() => {
         const shoe = document.querySelector(".product-tile")
-        const titel = shoe.querySelector(".brand a").innerHTML;
-        const image = shoe.querySelector(".tile-image").src;
+        const shoeTitel = shoe.querySelector(".brand a").innerHTML;
+        const shoeImage = shoe.querySelector(".tile-image").src;
+        const shoeType = shoe.querySelector(".pdp-link > a").innerHTML;
+        const shoePrice = shoe.querySelector(".value").innerHTML;
 
         return {
-            titel,
-            image
+            shoeTitel,
+            shoeImage,
+            shoeType,
+            shoePrice
         }
     })
 
