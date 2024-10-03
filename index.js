@@ -7,10 +7,12 @@ async function getShoes(){
         const shoeContainer = document.querySelector(".shoeContainer");
 
         shoeData.forEach(shoe => {
-            shoeContainer.insertAdjacentHTML("beforeend", 
-                `<div class="shoeItem">
-                <img src="${shoe.shoeImage}"></div>`
-            )
+            if (shoe.shoeImage != "") {
+                shoeContainer.insertAdjacentHTML("beforeend", 
+                    `<div class="shoeItem">
+                    <img src="${shoe.shoeImage}"></div>`
+                ) 
+            }            
         });
     } catch (error){
         console.log(error);
