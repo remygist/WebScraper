@@ -8,7 +8,7 @@ const getShoes = async () => {
         headless: false,
     });
 
-     // Use the first page opened
+    // Use the first page opened
     const [page] = await browser.pages();
 
     // Navigate the page to a URL
@@ -26,7 +26,37 @@ const getShoes = async () => {
     } catch (error) {
         console.log("No cookie box found or failed to load.");
         console.log(error);
-        
+
+    }
+
+    const moreBtnSelector = ".btn.btn-primary.px-5";
+
+    let amountOfBtnClick = 0;
+
+    while (amountOfBtnClick < 9) {
+        const isButton = (await page.$(moreBtnSelector)) !== null;
+
+        if (!isButton) {
+            console.log("no button found");
+            break;
+        }
+
+        const initialProductCount = await page.evaluate(() => document.querySelectorAll('.product-tile').length);
+
+        // Scroll to the button and click it
+        await page.evaluate(() => {
+            const btn = document.querySelector(".btn.btn-primary.px-5");
+            btn.scrollIntoView();
+            btn.click();
+        });
+
+        await page.waitForFunction(
+            (initialCount) => document.querySelectorAll('.product-tile').length > initialCount,
+            {},
+            initialProductCount
+        );
+
+        amountOfBtnClick++;
     }
 
     //get elements from page
@@ -59,48 +89,10 @@ const getShoes = async () => {
         });
     });
 
-    const moreBtnSelector = ".btn.btn-primary.px-5";
-    
-    let amountOfBtnClick = 0;
-
-    while (amountOfBtnClick < 9) {
-        const isButton = (await page.$(moreBtnSelector)) !== null;
-
-        if (!isButton) {
-            console.log("no button found");
-            break;
-        }
-
-        const initialProductCount = await page.evaluate(() => document.querySelectorAll('.product-tile').length);
-
-        // Scroll to the button and click it
-        await page.evaluate(() => {
-            const btn = document.querySelector(".btn.btn-primary.px-5");
-            btn.scrollIntoView();
-            btn.click();
-        });
-
-        await page.waitForFunction(
-            (initialCount) => document.querySelectorAll('.product-tile').length > initialCount,
-            {},
-            initialProductCount
-        );
-        
-        amountOfBtnClick++;
-    } 
-
-
+    // console.log(shoes);
     // browser.close();
+    return shoes
 };
 
 getShoes();
 
-/* btn code
-moreBtn: '\n' +
-      '<div class="text-center">\n' +
-      '<button class="btn btn-primary px-5" data-url="https://www.torfs.be/on/demandware.store/Sites-Torfs-Webshop-BE-Site/nl_BE/Search-UpdateGrid?cgid=Heren-Schoenen&amp;start=24&amp;sz=24">\n' +
-      '<span>Meer</span>\n' +
-      '</button>\n' +
-      '</div>\n'
-  } 
-*/
