@@ -13,7 +13,8 @@ const getShoes = async () => {
 
     // Launch the browser and open a new blank page
     const browser = await puppeteer.launch({
-        headless: true
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'], 
     });
 
     // Use the first page opened
