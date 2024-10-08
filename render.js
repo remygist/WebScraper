@@ -13,8 +13,7 @@ const getShoes = async () => {
 
     // Launch the browser and open a new blank page
     const browser = await puppeteer.launch({
-        executablePath: '/opt/render/.cache/puppeteer/chrome/linux-129.0.6668.89/chrome-linux64/chrome',
-        headless: true,
+        headless: true
     });
 
     // Use the first page opened
