@@ -1,5 +1,6 @@
 "use strict";
 
+const loader = document.querySelector(".loader");
 const shoeContainer = document.querySelector(".shoeContainer");
 const shoeList = [];
 let currentIndex = 0;
@@ -10,6 +11,9 @@ moreBtn.addEventListener("click", () => {
 
 async function getShoes() {
     try {
+        loader.style.display = "block";
+        moreBtn.style.display = "none";
+
         const response = await fetch("http://localhost:3000/getShoes");
         const shoeData = await response.json();
         shoeData.forEach(shoe => {
@@ -19,6 +23,9 @@ async function getShoes() {
         });
     } catch (error) {
         console.log(error);
+    } finally {
+        loader.style.display = "none";
+        moreBtn.style.display = "";
     }
     console.log(shoeList);
     loadMoreShoes(24)
