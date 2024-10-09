@@ -41,8 +41,9 @@ function loadMoreShoes(count){
             `<div class="shoeItem">
             <img src="${shoeItem.shoeImage}">
             <h1>${shoeItem.shoeTitel}</h1>
+            <div class="shoeInfo">
             <p>${shoeItem.shoeType}</p>
-            <p>${shoeItem.shoePrice}</p></div>`
+            <p>${shoeItem.shoePrice}</p></div></div>`
 
         );
         currentIndex++
