@@ -74,22 +74,22 @@ const getShoes = async () => {
         return Array.from(shoeList).map((shoe) => {
             const shoeTitel = shoe.querySelector(".brand a")
                 ? shoe.querySelector(".brand a").innerHTML
-                : "Unknown Title";
+                : "";
 
             const shoeImageElement = shoe.querySelectorAll(".tile-image")[0]; // First image element
             const shoeImage = shoeImageElement
                 ? (shoeImageElement.src.includes("data:image") && shoeImageElement.getAttribute("data-src"))  // Check if it's a placeholder, if so, try data-src
                     ? shoeImageElement.getAttribute("data-src") // If there's a lazy-loaded image URL in data-src
                     : shoeImageElement.src // Otherwise, use src
-                : "No Image Available";
+                : "";
 
             const shoeType = shoe.querySelector(".pdp-link > a")
                 ? shoe.querySelector(".pdp-link > a").innerHTML
-                : "Unknown Type";
+                : "";
 
             const shoePrice = shoe.querySelector(".value")
                 ? shoe.querySelector(".value").innerHTML
-                : "No Price Available";
+                : "";
 
             return {
                 shoeTitel,

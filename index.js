@@ -13,7 +13,7 @@ async function getShoes() {
         const response = await fetch("http://localhost:3000/getShoes");
         const shoeData = await response.json();
         shoeData.forEach(shoe => {
-            if (shoe.shoeImage != "" && shoe.shoeImage.startsWith("http")) {
+            if (shoe.shoeImage != "" && shoe.shoeImage.startsWith("http") && shoe.shoeTitel != "" && shoe.shoePrice != "" && shoe.shoeType != "") {
                 shoeList.push(shoe)
             }
         });
