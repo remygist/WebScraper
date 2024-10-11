@@ -18,7 +18,6 @@ The goal is to scrape data such as the images, brand, type and price of each sho
 - [Puppeteer](https://pptr.dev/)
 - [Chatgpt](https://chatgpt.com/share/66fbef1d-69f4-8007-863a-5cd45edb54c2)
 - [Freecodecamp](https://www.freecodecamp.org/news/web-scraping-in-javascript-with-puppeteer/)
-- [Render](https://dashboard.render.com/)
 
 # Encountered obstacles
 - Accessing elements:
